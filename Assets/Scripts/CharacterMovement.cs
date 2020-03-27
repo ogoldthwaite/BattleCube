@@ -7,7 +7,7 @@ public class CharacterMovement
     public float maxSpeed = 20;
     
 
-    public void MoveForward(Rigidbody rb, float speed)
+/*    public void MoveForward(Rigidbody rb, float speed)
     {
         if (rb.velocity.magnitude < maxSpeed)
         {
@@ -23,6 +23,7 @@ public class CharacterMovement
         }
     }
 
+    */
     public void MoveRight(Rigidbody rb, float speed)
     {
         if (rb.velocity.magnitude < maxSpeed)
