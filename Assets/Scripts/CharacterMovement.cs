@@ -55,6 +55,7 @@ public class CharacterMovement
 
     public void Jump(Rigidbody rb, float jumpForce)
     {
+        Debug.Log("Jump");
         rb.AddForce(Vector3.up * jumpForce);
     }
 
