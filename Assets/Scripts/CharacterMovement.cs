@@ -31,18 +31,30 @@ public class CharacterMovement
         {
             rb.AddForce(Vector3.right * speed);
             if (!facingRight)
-            {
-
+            { 
+                Player.transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
+                facingRight = true;
             }
         }
     }
 
-    public void MoveLeft(Rigidbody rb, float speed)
+    public void MoveLeft(GameObject Player, Rigidbody rb, float speed)
     {
         if (rb.velocity.magnitude < maxSpeed)
         {
             rb.AddForce(Vector3.left * speed);
+            if(facingRight)
+            {
+                Player.transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
+                facingRight = false;
+            }
+
+
         }
+
+
+
+
     }
 
     public void Jump(Rigidbody rb, float jumpForce)

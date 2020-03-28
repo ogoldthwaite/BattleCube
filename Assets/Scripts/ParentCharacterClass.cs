@@ -53,12 +53,12 @@ public class ParentCharacterClass : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            moveScript.MoveLeft(rb, moveSpeed);
+            moveScript.MoveLeft(gameObject, rb, moveSpeed);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            moveScript.MoveRight(rb, moveSpeed);
+            moveScript.MoveRight(gameObject, rb, moveSpeed);
         }
 
     }
