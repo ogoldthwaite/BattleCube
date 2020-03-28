@@ -32,7 +32,7 @@ public class CharacterMovement
             rb.AddForce(Vector3.right * speed);
             if (!facingRight)
             { 
-                Player.transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
+                Player.transform.rotation *= Quaternion.AngleAxis(180, Vector3.up);
                 facingRight = true;
             }
         }
@@ -45,7 +45,7 @@ public class CharacterMovement
             rb.AddForce(Vector3.left * speed);
             if(facingRight)
             {
-                Player.transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
+                Player.transform.rotation *= Quaternion.AngleAxis(180, Vector3.up);
                 facingRight = false;
             }
 

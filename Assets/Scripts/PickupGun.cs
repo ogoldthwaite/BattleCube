@@ -6,7 +6,7 @@ using UnityEngine;
 /* Take a look back at this script if/when multiplayer functionality gets added.
  * It will probably need a pretty significant overhaul.
  **/
-public class PickupItem : MonoBehaviour
+public class PickupGun : MonoBehaviour
 {
     public GameObject item;
     public int itemCount = 1;
@@ -27,6 +27,11 @@ public class PickupItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(itemCount <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         //If player is in range to grab and at least 1 item left and E is being pressed
         if (playerInRange && itemCount > 0 && Input.GetKey(KeyCode.E))
         {
@@ -34,6 +39,7 @@ public class PickupItem : MonoBehaviour
             GameObject player = playerList[0];
             Vector3 spawnPos = new Vector3(player.transform.position.x, player.transform.position.y + 2, player.transform.position.z);
             GameObject itemInstance = Instantiate(item, spawnPos, Quaternion.identity);
+            itemInstance.GetComponent<ParentGunClass>().player = player; // Setting the "Player" field of the gun class
             itemInstance.transform.parent = player.transform;
         }
     }

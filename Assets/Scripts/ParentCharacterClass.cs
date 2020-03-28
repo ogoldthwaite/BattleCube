@@ -13,9 +13,9 @@ public class ParentCharacterClass : MonoBehaviour
     public float jumpForce = 50;
     public int maxJumps = 2;
     private int jumpCount;
+    public CharacterMovement moveScript;
 
     private Rigidbody rb;
-    private CharacterMovement moveScript;
     private BasicAttack punch;
 
     // Start is called before the first frame update
@@ -43,8 +43,6 @@ public class ParentCharacterClass : MonoBehaviour
             StartCoroutine(punch.AttackOne(yMin, yMax, hitStrength, gameObject, hitDistance, 0, moveScript.facingRight));
 
         }
-
-
     }
 
     void FixedUpdate()
