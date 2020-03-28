@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class ParentCharacterClass : MonoBehaviour
 {
-    public float moveSpeed;
-    public float jumpForce;
+    public float playerMass = 2;
+    public float moveSpeed = 50;
+    public float jumpForce = 50;
+    public int maxJumps = 2;
+    private int jumpCount;
 
     private Rigidbody rb;
     private CharacterMovement moveScript;
@@ -15,29 +18,23 @@ public class ParentCharacterClass : MonoBehaviour
     {
         moveScript = new CharacterMovement();
         rb = GetComponent<Rigidbody>();
+        rb.mass = playerMass;
 
 
 
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && jumpCount > 0)
         {
             moveScript.Jump(rb, jumpForce);
+            jumpCount--;
         }
+    }
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            moveScript.MoveForward(rb, moveSpeed);
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            moveScript.MoveBackward(rb, moveSpeed);
-        }
-
+    void FixedUpdate()
+    {
         if (Input.GetKey(KeyCode.A))
         {
             moveScript.MoveLeft(rb, moveSpeed);
@@ -48,6 +45,14 @@ public class ParentCharacterClass : MonoBehaviour
             moveScript.MoveRight(rb, moveSpeed);
         }
 
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.tag == "Floor")
+        {
+            jumpCount = maxJumps;
+        }
     }
 
 }
