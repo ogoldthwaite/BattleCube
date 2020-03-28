@@ -37,8 +37,8 @@ public class ParentCharacterClass : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            float yMin = playerHeight * 0.25f + transform.position.y;
-            float yMax = playerHeight * 0.75f + transform.position.y;
+            float yMin = playerHeight * 0.25f + transform.position.y - playerHeight/2.5f;
+            float yMax = playerHeight * 0.75f + transform.position.y - playerHeight/2.5f;
 
             StartCoroutine(punch.AttackOne(yMin, yMax, hitStrength, gameObject, hitDistance, 0, moveScript.facingRight));
 
