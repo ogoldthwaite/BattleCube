@@ -16,8 +16,6 @@ public class BasicAttack
 
         Vector3 direction = facingRight ? Vector3.right : Vector3.left;
 
-
-
         if (!isHitting)
         {
             isHitting = true;
@@ -25,7 +23,7 @@ public class BasicAttack
                 {
                     position.y = yInterval * i + yMin;
                     RaycastHit hit;
-                    Debug.DrawRay(position, direction * hitDistance, Color.cyan);
+                    Debug.DrawRay(position, direction * hitDistance, Color.black);
                     if (Physics.Raycast(position, direction, out hit, hitDistance))
                     {
                         if (hit.collider != null)
