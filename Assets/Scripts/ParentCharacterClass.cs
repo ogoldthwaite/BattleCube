@@ -35,13 +35,13 @@ public class ParentCharacterClass : MonoBehaviour
             jumpCount--;
         }
 
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButtonDown(0))
         {
             print("sit");
             float yMin = playerHeight * 0.25f + transform.position.y;
             float yMax = playerHeight * 0.75f + transform.position.y;
 
-            StartCoroutine(punch.AttackOne(yMin, yMax, hitStrength, gameObject, hitDistance, 0));
+            StartCoroutine(punch.AttackOne(yMin, yMax, hitStrength, gameObject, hitDistance, hitCooldown, false));
 
             print("seated");
         }

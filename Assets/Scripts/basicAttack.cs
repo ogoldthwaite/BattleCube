@@ -8,11 +8,16 @@ public class BasicAttack
     private int numRayCasts = 5;
 
 
-    public IEnumerator AttackOne(float yMin, float yMax, float strength, GameObject player, float hitDistance, float hitCooldown)
+    public IEnumerator AttackOne(float yMin, float yMax, float strength, GameObject player, float hitDistance, float hitCooldown, bool facingRight)
     {
         float yInterval = (yMax - yMin) / numRayCasts;
         Vector3 position = player.transform.position;
         position.y = yMin;
+
+        Vector3 direction = facingRight ? Vector3.right : Vector3.left;
+
+
+
         if (!isHitting)
         {
             isHitting = true;
@@ -20,8 +25,8 @@ public class BasicAttack
                 {
                     position.y = yInterval * i + yMin;
                     RaycastHit hit;
-                    Debug.DrawRay(position, Vector3.right * hitDistance, Color.cyan);
-                    if (Physics.Raycast(position, Vector3.right, out hit, hitDistance))
+                    Debug.DrawRay(position, direction * hitDistance, Color.cyan);
+                    if (Physics.Raycast(position, direction, out hit, hitDistance))
                     {
                         if (hit.collider != null)
                         {
