@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class basicAttack
+public class BasicAttack
 {
     private bool isHitting;
-    private int numRayCasts;
+    private int numRayCasts = 5;
 
 
-    public IEnumerator BasicAttack(float yMin, float yMax, float strength, GameObject player, float hitDistance, float hitCooldown)
+    public IEnumerator AttackOne(float yMin, float yMax, float strength, GameObject player, float hitDistance, float hitCooldown)
     {
         float yInterval = (yMax - yMin) / numRayCasts;
         Vector3 position = player.transform.position;
@@ -16,26 +16,28 @@ public class basicAttack
         if (!isHitting)
         {
             isHitting = true;
-            for (int i = 0; i <= numRayCasts; i++)
-            {
-                position.y = yInterval * i;
-                RaycastHit hit;
-                if (Physics.Raycast(position, Vector3.forward, out hit, hitDistance))
+                for (int i = 0; i < numRayCasts; i++)
                 {
-                    if (hit.collider != null) {
-                        if (hit.collider.gameObject.tag == "Player")
+                    position.y = yInterval * i + yMin;
+                    RaycastHit hit;
+                    Debug.DrawRay(position, Vector3.right * hitDistance, Color.cyan);
+                    if (Physics.Raycast(position, Vector3.right, out hit, hitDistance))
+                    {
+                        if (hit.collider != null)
                         {
-                            Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
-                            rb.AddForce((position - hit.collider.gameObject.transform.position) * strength);
-                        }
-                        else if (hit.collider.gameObject.tag == "Hittable")
-                        {
-                            Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
-                            rb.AddForce((position - hit.collider.gameObject.transform.position) * strength);
+                            if (hit.collider.gameObject.tag == "Player")
+                            {
+                                Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
+                                rb.AddForce((hit.collider.gameObject.transform.position - position) * strength);
+                            }
+                            else if (hit.collider.gameObject.tag == "Hittable")
+                            {
+                                Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
+                                rb.AddForce((hit.collider.gameObject.transform.position - position) * strength);
+                            }
                         }
                     }
                 }
-            }  
         }
         yield return new WaitForSeconds(hitCooldown);
         isHitting = false;
